@@ -13,8 +13,8 @@ class Chat extends CI_Controller {
 		$tuid = (int)$tuid;
 		$data = array( 'rcode' => 500, 'msg' => '' );
 
-		$token = $this->input->get('token');
-		$text = $this->input->get('text');
+		$token = $this->input->post('token');
+		$text = $this->input->post('text');
 
 		if( $text == NULL ) {
 			$data['rcode'] = 500;
@@ -64,7 +64,7 @@ class Chat extends CI_Controller {
 		$time = (int)$time;
 		$data = array( 'rcode' => 500, 'msg' => '' );
 
-		$token = $this->input->get('token');
+		$token = $this->input->post('token');
 
 		if( $token != null ) {
 
@@ -94,8 +94,8 @@ class Chat extends CI_Controller {
 		$cid = (int)$cid;
 		$data = array( 'rcode' => 500, 'msg' => '' );
 
-		$token = $this->input->get('token');
-		$text = $this->input->get('text');
+		$token = $this->input->post('token');
+		$text = $this->input->post('text');
 
 		if( $text == NULL ) {
 			$data['rcode'] = 500;
@@ -146,7 +146,7 @@ class Chat extends CI_Controller {
 		$cid = (int)$cid;
 		$data = array( 'rcode' => 500, 'msg' => '' );
 
-		$token = $this->input->get('token');
+		$token = $this->input->post('token');
 
 		if( $cid != 0 ) {
 
