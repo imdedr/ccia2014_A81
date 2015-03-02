@@ -46,6 +46,7 @@ class Fs extends CI_Controller {
 
 			$this->load->model('fs_model');
 			$info = $this->fs_model->getTextbookInfo( $fid );
+			$info->file_list = json_decode( $info->file_list );
 
 			if( $info !== false ) {
 
