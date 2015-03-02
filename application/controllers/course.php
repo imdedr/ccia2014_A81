@@ -224,7 +224,7 @@ class Course extends CI_Controller {
 
 					foreach ($rc_raw_all as $k => $v) {
 
-						if( $this->db->get_where( 'rollcall_record', array( 'uid'=>$user->uid ) )->num_rows == 1 ) {
+						if( $this->db->get_where( 'rollcall_record', array( 'rcid'=>$v->rcid ,'uid'=>$user->uid ) )->num_rows == 1 ) {
 							$record[] = array( 'time'=>$v->time, 'attend'=>'Y');
 						} else {
 							$record[] = array( 'time'=>$v->time, 'attend'=>'N');
