@@ -53,7 +53,11 @@ class Fs_model extends CI_Model {
         $raw = $this->db->get_where( 'course_textbook', array( 'cid'=>$cid ) );
 
         if( $raw->num_rows != 0 ) {
-            return $raw->result();
+            $data = $raw->result();
+            foreach ($data as $k => $v) {
+                $data[$k]->file_list = json_decode( $data[$k]->file_list );
+            }
+            return $data;
         } else {
             return [];
         }
