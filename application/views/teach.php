@@ -70,7 +70,7 @@ function pageDown() {
 function checkHand() {
 	$.ajax({
         type: "POST",
-        url: "http://127.0.0.1/ccia2014_A81/index.php/api/hand_check/1",
+        url: "http://keniver.com/sla/api/hand_check/1",
         dataType: 'json'
     })
     .done(function( msg ) {
@@ -90,7 +90,7 @@ function checkHand() {
 function accHand() {
     $.ajax({
         type: "POST",
-        url: "http://127.0.0.1/ccia2014_A81/index.php/api/hand_accept/" + hid.toString(),
+        url: "http://keniver.com/sla/api/hand_accept/" + hid.toString(),
         dataType: 'json'
     })
     .done(function( msg ) {
@@ -104,7 +104,7 @@ function accHand() {
 function hand_queue() {
 	$.ajax({
         type: "POST",
-        url: "http://127.0.0.1/ccia2014_A81/index.php/api/hand_queue/" + listen_token + "/" + last_queue.toString(),
+        url: "http://keniver.com/sla/api/hand_queue/" + listen_token + "/" + last_queue.toString(),
         dataType: 'json'
     })
     .done(function( msg ) {
