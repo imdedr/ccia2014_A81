@@ -37,6 +37,16 @@ class Api extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function update_page( $ssid ) {
+		$data = array( );
+		$page = $this->input->post( 'page' );
+
+		$this->db->where( array( 'ssid'=>$ssid ) );
+		$this->db->update( 'session', array( 'page'=>$page ) );
+
+		echo json_encode($data);
+	}
+
 }
 
 /* EOF */
