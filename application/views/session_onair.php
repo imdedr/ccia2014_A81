@@ -238,7 +238,7 @@ function command_parser( cmd ) {
         p1 = eval( raw[1] );
         p2 = eval( raw[2] );
         $('#myCanvas').drawLine({
-            strokeStyle: '#000',
+            strokeStyle: '#FF4000',
             strokeWidth: 3,
             x1: p1[0], y1: p1[1],
             x2: p2[0], y2: p2[1],
