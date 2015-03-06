@@ -91,7 +91,7 @@ function loadPage( p ) {
         fromCenter: false
     });
 
-    replay( p );
+    //replay( p );
 
     $.ajax({
         type: "POST",
@@ -149,6 +149,7 @@ function checkHand() {
                         {
                             addClass: 'btn btn-danger', text: '忽略', onClick: function($noty) {
                                 $noty.close();
+                                rejectHand( hid );
                                 setTimeout( checkHand, 1000 );
                             }
                         }
@@ -167,6 +168,19 @@ function accHand( hid ) {
     $.ajax({
         type: "POST",
         url: domain +  "api/hand_accept/" + hid.toString(),
+        dataType: 'json'
+    })
+    .done(function( msg ) {
+        listen_token = msg.token;
+        console.log( 'Listen Token: ' + listen_token );
+        setTimeout( hand_queue, 500 );
+    });
+}
+
+function rejectHand( hid ) {
+    $.ajax({
+        type: "POST",
+        url: domain +  "api/hand_reject/" + hid.toString(),
         dataType: 'json'
     })
     .done(function( msg ) {

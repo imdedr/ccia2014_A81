@@ -28,6 +28,15 @@ class Api extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function hand_reject( $hid ) {
+		$data = array( );
+
+		$this->db->where( array( 'hid'=>$hid ) );
+		$this->db->delete( 'handup', array( 'hid'=>$hid ) );
+
+		echo json_encode($data);
+	}
+
 	public function hand_queue( $token, $time ) {
 		$data = array( );
 
