@@ -72,6 +72,27 @@ class Teacher extends CI_Controller {
 
 	}
 
+	public function continue_session( $ssid ) {
+
+		if( $this->session->userdata( 'uid' ) == NULL ) {
+			redirect( '/teacher/login' );
+		}
+
+		// 抓出課本資料
+		$session = $this->db->get_where( 'session', array( 'ssid'=>$ssid ) )->result()[0];
+		
+		// 複製一份
+		$this->db->insert( 'session', array( 'cid'=>$session->cid, 'textbook'=>$session->textbook, 'page'=>$session->page, 'date'=>time(), 'time'=>time() ) );
+		$ssid = $this->db->insert_id();
+
+		// 切換當前課程資訊
+		$this->db->where( array( 'cid'=>$session->cid ) );
+		$this->db->update( 'course_session', array( 'ssid'=>$ssid ) );
+
+		redirect( '/teacher/session_onair/'.$ssid );
+
+	}
+
 	public function session_onair( $ssid ) {
 
 		if( $this->session->userdata( 'uid' ) == NULL ) {

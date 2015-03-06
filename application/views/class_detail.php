@@ -16,7 +16,7 @@
             <th scope="row"><?=$i++; ?></th>
             <td><?=date( 'Y-m-d H:i:s', $value->date); ?></td>
             <td><?=$value->textbook; ?> 第<?=$value->page+1; ?>頁</td>
-            <td>接續上課</td>
+            <td><a target="_blank" href="<?=base_url('/teacher/continue_session/'.$value->ssid); ?>">接續上課</a></td> 
           </tr>
           <?php endforeach ?>
         </tbody>
