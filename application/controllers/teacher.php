@@ -47,7 +47,7 @@ class Teacher extends CI_Controller {
 			$session[$i] = (object)$tmp;
 		}
 
-		$this->load->view( 'class_detail', array( 'session'=>$session, 'rollcall'=>$rollcall, 'textbook'=>$textbook, 'file'=>$file ) );
+		$this->load->view( 'class_detail', array( 'cid'=>$cid, 'session'=>$session, 'rollcall'=>$rollcall, 'textbook'=>$textbook, 'file'=>$file ) );
 
 	}
 
@@ -87,6 +87,27 @@ class Teacher extends CI_Controller {
 		$textbook->file_list = json_decode( $textbook->file_list );
 
 		$this->load->view( 'session_onair', array( 'cid'=>$session->cid, 'ssid'=>$ssid, 'file_list'=>$textbook->file_list, 'path'=>$textbook->path, 'page'=>$session->page ) );
+
+	}
+
+	public function create_new_rollcall( $cid ) {
+		// 建立新的點名
+		$this->db->insert( 'rollcall', array( 'cid'=>$cid, 'time'=>time() ) );
+		$rcid = $this->db->insert_id();
+
+		// 轉移
+		redirect( '/teacher/rollcall/'.$rcid );
+
+	}
+
+	public function rollcall( $rcid ) {
+		// 讀取點名表資料
+		$rc = $this->db->get_where( 'rollcall', array( 'rcid'=>$rcid ) )->result()[0];
+
+		// 讀取該課程的修課學生資料
+		$student = $this->db->query( "SELECT course_user.*, user.name FROM `course_user` LEFT JOIN `user` ON course_user.uid = user.uid WHERE cid=".$rc->cid.";" )->result();
+
+		$this->load->view( 'rollcall', array( 'rcid'=>$rcid, 'cid'=>$rc->cid, 'student'=>$student ) );
 
 	}
 

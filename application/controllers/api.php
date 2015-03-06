@@ -56,6 +56,52 @@ class Api extends CI_Controller {
 		echo json_encode($data);
 	}
 
+	public function rollcall_record( $rcid ) {
+		$data = array( );
+
+		$data['record'] = $this->db->get_where( 'rollcall_record', array( 'rcid'=>$rcid ) )->result();
+
+		echo json_encode($data);
+	}
+
+	public function rollcall_edit( $rcid ) {
+
+		$data = array( );
+
+		$uid = $this->input->post( 'uid' );
+		$status = $this->input->post( 'status' );
+
+		if( $status == 'attend' ) {
+			// 插入紀錄
+			$this->db->insert( 'rollcall_record', array( 'rcid'=>$rcid, 'uid'=>$uid ) );
+		} else {
+			// 刪除記錄
+			$this->db->delete( 'rollcall_record', array( 'rcid'=>$rcid, 'uid'=>$uid ) );
+		}
+
+		echo json_encode($data);
+
+	}
+
+	public function rollcall_start( $cid ) {
+		$data = array( );
+
+		$rcid = $this->input->post( 'rcid' );
+		$this->db->where( array( 'cid'=>$cid ) );
+		$this->db->update( 'course_session', array( 'rollcall'=>$rcid ) );
+
+		echo json_encode($data);
+	}
+
+	public function rollcall_stop( $cid ) {
+		$data = array( );
+
+		$this->db->where( array( 'cid'=>$cid ) );
+		$this->db->update( 'course_session', array( 'rollcall'=>0 ) );
+
+		echo json_encode($data);
+	}
+
 }
 
 /* EOF */

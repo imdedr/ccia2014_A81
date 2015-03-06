@@ -23,7 +23,7 @@
       </table>
       <br><br>
       <table class="table">
-        <caption>點名記錄[開始點名]</caption>
+        <caption>點名記錄 <a target="_blank" href="<?=base_url( '/teacher/create_new_rollcall/'.$cid ); ?>">[新增點名紀錄]</a></caption>
         <thead>
           <tr>
             <th>#</th>
@@ -36,7 +36,7 @@
           <tr>
             <th scope="row"><?=$i++; ?></th>
             <td><?=date( 'Y-m-d H:i:s', $value->time); ?></td>
-            <td>展開</td>
+            <td><a target="_blank" href="<?=base_url( '/teacher/rollcall/'.$value->rcid ); ?>">展開</a></td>
           </tr>
           <?php endforeach ?>
         </tbody>
